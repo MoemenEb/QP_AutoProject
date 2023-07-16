@@ -23,29 +23,35 @@ public class NavBar {
     final By Login = By.linkText("Log in");
     final By Signup = By.linkText("Sign up");
     final By WelcomeUser = By.id("nameofuser");
+    private WebDriverWait wait;
 
     public NavBar(WebDriver webDriver){
         this.driver = webDriver;
         this.modal = new Modal(webDriver);
+        wait = new WebDriverWait(driver,Duration.ofSeconds(20));
     }
 
 
     public HomePage navToHome(){
+        wait.until(ExpectedConditions.elementToBeClickable(HomePage));
         driver.findElement(HomePage).click();
         return new HomePage(driver);
     }
 
     public CartPage navToCart(){
+        wait.until(ExpectedConditions.elementToBeClickable(CartPage));
         driver.findElement(CartPage).click();
         return new CartPage(driver);
     }
 
     public SignupForm navToSignup(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Signup));
         driver.findElement(Signup).click();
         return modal.isModalVisible() ? new SignupForm(driver) : null;
     }
 
     public LoginForm navToLogin(){
+        wait.until(ExpectedConditions.elementToBeClickable(Login));
         driver.findElement(Login).click();
         return modal.isModalVisible() ? new LoginForm(driver) : null;
     }
@@ -55,7 +61,6 @@ public class NavBar {
     }
 
     public boolean isLoggedin(){
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(WelcomeUser));
         return driver.findElement(WelcomeUser).isDisplayed();
     }

@@ -2,12 +2,13 @@ package utils;
 
 import objects.pages.HomePage;
 import objects.pages.Page;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.asserts.SoftAssert;
 
 
@@ -15,10 +16,12 @@ public class TestInit {
     protected static Page homePage;
     private static WebDriver webDriver;
     protected static SoftAssert softAssert;
+    protected static Logger logger;
 
-    @BeforeSuite (alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setup(){
-        System.out.println("in setup");
+        logger = LogManager.getLogger(TestInit.class);
+        logger.info("Before Suite ");
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
         webDriver.get(homePage.getUrl());
@@ -27,6 +30,7 @@ public class TestInit {
 
     @AfterClass
     public void testFinish(){
+        logger.info("Quit Chrome");
         webDriver.quit();
     }
 
@@ -42,4 +46,7 @@ public class TestInit {
         return webDriver.getCurrentUrl();
     }
 
+    public static Logger getLogger() {
+        return logger;
+    }
 }

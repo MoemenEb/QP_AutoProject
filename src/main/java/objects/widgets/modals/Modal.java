@@ -1,8 +1,8 @@
 package objects.widgets.modals;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,7 +12,6 @@ public class Modal {
     protected WebDriver webDriver;
     protected WebDriverWait wait;
     final By ModalBox = By.cssSelector(".modal.fade.show");
-    final By CloseButton = By.xpath("//button[contains(text(),'Close')]");
 
     public Modal(WebDriver driver) {
         webDriver = driver;
@@ -29,5 +28,13 @@ public class Modal {
     public String alertText(){
         wait.until(ExpectedConditions.alertIsPresent());
         return webDriver.switchTo().alert().getText();
+    }
+
+    public void closeModal(){
+        webDriver.findElement(ModalBox).sendKeys(Keys.ESCAPE);
+    }
+
+    public void closeAlert(){
+        webDriver.switchTo().alert().accept();
     }
 }
