@@ -1,5 +1,6 @@
 package objects.pages;
 
+import objects.widgets.modals.PlaceOrder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,8 +55,9 @@ public class CartPage extends Page{
         return Integer.parseInt(driver.findElement(totalPrice).getText());
     }
 
-    public void placeOrder(){
+    public PlaceOrder placeOrder(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(PlaceOrderButton));
         driver.findElement(PlaceOrderButton).click();
+        return new PlaceOrder(driver);
     }
 }
