@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 import utils.TestInit;
 
 
-public class LoginTestCases extends TestInit {
+public class LoginTest extends TestInit {
     private LoginForm loginForm;
-    private Logger logger = LogManager.getLogger(LoginTestCases.class);
+    private Logger logger = LogManager.getLogger(LoginTest.class);
 
     @BeforeMethod
     public void Setup(){

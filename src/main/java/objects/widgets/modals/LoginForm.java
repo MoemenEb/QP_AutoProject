@@ -4,14 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.time.Duration;
-
 public class LoginForm extends Modal{
     final By LoginUserName = By.id("loginusername");
     final By LoginPass = By.id("loginpassword");
     final By LoginSubmit = By.xpath(".//button[contains(text(),'Log in')]");
-    final By CloseButton = By.xpath(".//button[contains(text(),'Close')]");
-
     final String LoginFail = "Wrong password.";
 
     public LoginForm(WebDriver driver){

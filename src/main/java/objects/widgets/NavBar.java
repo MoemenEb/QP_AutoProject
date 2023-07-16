@@ -45,7 +45,7 @@ public class NavBar {
     }
 
     public SignupForm navToSignup(){
-        wait.until(ExpectedConditions.elementToBeClickable(Signup));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(Signup));
         driver.findElement(Signup).click();
         return modal.isModalVisible() ? new SignupForm(driver) : null;
     }

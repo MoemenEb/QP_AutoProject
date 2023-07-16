@@ -35,4 +35,8 @@ public class SignupForm extends Modal{
         return alertText().equals(successfullSignUp);
     }
 
+    public void clearForm(){
+        webDriver.findElement(SignUserName).clear();
+        webDriver.findElement(SignPass).clear();
+    }
 }

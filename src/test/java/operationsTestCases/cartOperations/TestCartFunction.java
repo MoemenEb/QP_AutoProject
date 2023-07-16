@@ -4,6 +4,8 @@ import objects.pages.CartPage;
 import objects.pages.HomePage;
 import objects.pages.Product;
 import objects.widgets.NavBar;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.TestInit;
 
@@ -11,13 +13,16 @@ public class TestCartFunction extends TestInit {
     private HomePage home;
     private CartPage cartPage;
     private Product productPage;
-    private NavBar navBar;
     final int FIRST_ITEM = 0;
 
 
+    @BeforeMethod
+    public void returnToHomePage(){
+        home = new HomePage(getWebDriver());
+        getWebDriver().get(home.getUrl());
+    }
     @Test
     public void addItemToCart(){
-        home = new HomePage(getWebDriver());
         home.getCategoriesList().listPhones();
         productPage = home.getCategoriesSection().openProduct(FIRST_ITEM);
         String productName = productPage.getProdcutName();
@@ -31,7 +36,8 @@ public class TestCartFunction extends TestInit {
 
     @Test
     public void removeItemFromCart(){
-        home = new HomePage(getWebDriver());
+//        home = new HomePage(getWebDriver());
+//        home.getNavBar().navToHome();
         home.getCategoriesList().listPhones();
         productPage = home.getCategoriesSection().openProduct(FIRST_ITEM);
         String productName = productPage.getProdcutName();
