@@ -1,10 +1,8 @@
 package objects.widgets.modals;
 
-import objects.widgets.NavBar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -12,9 +10,10 @@ public class LoginForm extends Modal{
     final By LoginUserName = By.id("loginusername");
     final By LoginPass = By.id("loginpassword");
     final By LoginSubmit = By.xpath(".//button[contains(text(),'Log in')]");
+    final By CloseButton = By.xpath(".//button[contains(text(),'Close')]");
+
     final String LoginFail = "Wrong password.";
 
-    final String successfullLogin = "";
     public LoginForm(WebDriver driver){
         super(driver);
     }
@@ -35,11 +34,13 @@ public class LoginForm extends Modal{
         return LoginPass;
     }
 
-    public String getLoginFail() {
-        return LoginFail;
+    public boolean isLogginFail(){
+        wait.until(ExpectedConditions.alertIsPresent());
+        return alertText().equals(LoginFail);
     }
 
-    public boolean isLogginFail(){
-        return alertText().equals(LoginFail);
+    public void clearForm(){
+        webDriver.findElement(LoginUserName).clear();
+        webDriver.findElement(LoginPass).clear();
     }
 }
